@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>🔥 Gerador Sensi FF PRO+</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffcc00">
+<style>
+body {
+  margin: 0;
+  font-family: 'Arial Black', sans-serif;
+  background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+  color: #fff;
+}
+header {
+  padding: 20px;
+  text-align: center;
+  background: #ffcc00;
+  color: #020617;
+  text-shadow: 1px 1px 2px #000;
+}
+header h1 { margin: 0; }
+.container { padding: 20px; }
+.card { background: rgba(0,0,0,0.7); border: 2px solid #ffcc00; border-radius: 16px; padding: 20px; margin-bottom: 20px; }
+select, button { width:100%; padding:14px; margin-top:10px; border-radius:12px; border:none; font-size:16px; font-weight:bold; }
+button { background:#ffcc00; color:#020617; cursor:pointer; transition:0.3s; }
+button:hover { background:#ffd633; }
+.result { margin-top:15px; border:2px solid #ffcc00; border-radius:12px; padding:15px; background: rgba(255,255,255,0.05); }
+.model-section { margin-top:15px; }
+.option-highlight { background:#ffcc00; color:#020617; padding:4px 10px; border-radius:8px; font-weight:bold; margin:4px; display:inline-block; }
+h3 { color:#ffcc00; margin-top:10px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🔥 Gerador Sensi FF PRO+</h1>
+  <p id="device">Detectando dispositivo...</p>
+</header>
+
+<div class="container">
+  <div class="card">
+    <h2>🎮 Modo de jogo</h2>
+    <select id="modo">
+      <option value="">Selecione</option>
+      <option value="rush">Rush</option>
+      <option value="padrao">Padrão</option>
+      <option value="precisao">Precisão</option>
+    </select>
+
+    <div class="model-section">
+      <h2>📱 Modelo do celular</h2>
+      <select id="modelo">
+        <option value="">Selecione</option>
+        <option value="iPhone 13">iPhone 13</option>
+        <option value="iPhone 14">iPhone 14</option>
+        <option value="Samsung Galaxy S21">Samsung Galaxy S21</option>
+        <option value="Samsung Galaxy S22">Samsung Galaxy S22</option>
+        <option value="Xiaomi Redmi Note 12">Xiaomi Redmi Note 12</option>
+        <option value="Motorola Edge 30">Motorola Edge 30</option>
+        <option value="Realme GT 2">Realme GT 2</option>
+        <option value="Outro">Outro</option>
+      </select>
+    </div>
+
+    <button onclick="gerar()">Gerar Sensibilidade</button>
+
+    <div id="resultado" class="result" style="display:none;"></div>
+
+    <div class="model-section">
+      <h2>💡 Configurações recomendadas</h2>
+      <h3>⚡ No jogo Free Fire MAX:</h3>
+      <span class="option-highlight">Gráficos: Suave</span>
+      <span class="option-highlight">FPS: Alto</span>
+      <span class="option-highlight">Assistência de Mira: Ativada</span>
+      <span class="option-highlight">Botão de tiro personalizado</span>
+      <span class="option-highlight">Sensibilidade: ajuste gerado</span>
+
+      <h3>📱 No celular:</h3>
+      <span class="option-highlight">Modo desempenho / Jogos ativado</span>
+      <span class="option-highlight">Limpar apps em segundo plano</span>
+      <span class="option-highlight">Taxa de atualização alta ativada (60/120Hz)</span>
+      <span class="option-highlight">Não perturbe ativado</span>
+      <span class="option-highlight">Brilho máximo ou adaptativo</span>
+      <span class="option-highlight">Toque rápido calibrado</span>
+    </div>
+  </div>
+</div>
+
+<script>
+let marca = "Outro";
+
+// Detecta automaticamente a marca
+(function detectar(){
+  const ua = navigator.userAgent.toLowerCase();
+  if(ua.includes("iphone") || ua.includes("ipad")) marca = "iPhone";
+  else if(ua.includes("samsung")) marca = "Samsung";
+  else if(ua.includes("xiaomi") || ua.includes("redmi")) marca = "Xiaomi";
+  else if(ua.includes("motorola")) marca = "Motorola";
+  else if(ua.includes("realme")) marca = "Realme";
+  else if(ua.includes("android")) marca = "Android";
+
+  document.getElementById("device").innerHTML = "📱 Dispositivo detectado: " + marca;
+})();
+
+function gerar(){
+  const modo = document.getElementById("modo").value;
+  const modelo = document.getElementById("modelo").value;
+
+  if(!modo){ alert("Selecione o modo de jogo!"); return; }
+  if(!modelo){ alert("Selecione o modelo do celular!"); return; }
+
+  let base = 120;
+  if(marca === "iPhone") base = 135;
+  if(marca === "Samsung") base = 130;
+  if(marca === "Xiaomi") base = 128;
+  if(marca === "Motorola") base = 125;
+  if(marca === "Realme") base = 127;
+
+  if(modo === "rush") base += 10;
+  if(modo === "precisao") base -= 10;
+
+  const geral = base;
+  const red = base - 10;
+  const mira2x = base - 15;
+  const mira4x = base - 20;
+  const awm = base - 30;
+  const olha = base - 40;
+
+  document.getElementById("resultado").style.display = "block";
+  document.getElementById("resultado").innerHTML = `
+    <h3>🔥 Sensibilidade Gerada</h3>
+    <p>📱 Marca detectada: <b>${marca}</b></p>
+    <p>📱 Modelo selecionado: <b>${modelo}</b></p>
+    <p>🎮 Modo: <b>${modo}</b></p>
+    <hr>
+    Geral: <b>${geral}</b><br>
+    Red Dot: <b>${red}</b><br>
+    Mira 2x: <b>${mira2x}</b><br>
+    Mira 4x: <b>${mira4x}</b><br>
+    AWM: <b>${awm}</b><br>
+    Olhadinha: <b>${olha}</b>
+  `;
+}
+</script>
+
+</body>
+</html>
